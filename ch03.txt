@@ -1,0 +1,262 @@
+                Type	Time to Search	
+     Open Addressing	  0.1900	
+   Separate Chaining	  0.1881	
+    Triangle Probing	  0.2569	
+Exercise 3-1 Fragment evaluation
+Best Case Build Time
+       M	     Open Addressing	   Separate Chaining	       Sorted Chains	
+ 214,129	              0.4295	              0.2994	              0.2930	
+ 524,287	              0.3048	              0.2777	              0.2929	
+ 999,983	              0.2844	              0.2902	              0.2715	
+Worst Case Build Time
+       M	     Open Addressing	   Separate Chaining	       Sorted Chains	
+ 214,129	              0.4016	              0.2689	              0.3200	
+ 524,287	              0.2874	              0.2856	              0.2624	
+ 999,983	              0.2798	              0.2803	              0.2911	
+Search First Half
+       M	     Open Addressing	   Separate Chaining	       Sorted Chains	
+ 214,129	              0.3041	              0.1355	              0.1476	
+ 524,287	              0.1457	              0.1019	              0.1304	
+ 999,983	              0.1268	              0.1172	              0.1115	
+Search Back Half
+       M	     Open Addressing	   Separate Chaining	       Sorted Chains	
+ 214,129	              1.0114	              0.1412	              0.1717	
+ 524,287	              0.1468	              0.1018	              0.1184	
+ 999,983	              0.1071	              0.0960	              0.0999	
+Exercise 3-2 Hashtable with sorted linked list chains
+    Type	  Avg. Len	   Max Len	
+    Good	     1.056	         3	
+     Bad	  1250.000	      1293	
+Exercise 3-3 ValueBadHash exercise
+           M	 Prime	 Avg. LL	  Max LL	 Avg. OA	  Max OA	
+     428,880	      	    1.47	       9	   15.82	    1517	
+     428,881	      	    1.42	       7	   13.47	     786	
+     428,882	      	    1.45	       7	   13.94	    1001	
+     428,883	      	    1.74	      10	   13.15	     568	
+     428,884	      	    1.47	       9	   13.88	     948	
+     428,885	      	    1.42	       8	   13.86	     881	
+     428,886	      	    1.45	       8	   13.05	     828	
+     428,887	      	    1.42	       8	   14.78	    1321	
+     428,888	      	    1.47	       8	   13.94	     758	
+     428,889	      	    1.42	       7	   14.31	    1108	
+     428,890	      	    1.45	       9	   13.91	     845	
+     428,891	      	    1.42	       8	   12.70	     522	
+     428,892	      	    1.47	       8	   13.43	     782	
+     428,893	      	    1.42	       7	   12.87	     608	
+     428,894	      	    1.45	       7	   13.36	     601	
+     428,895	      	    1.42	       7	   11.98	     315	
+     428,896	      	    2.35	      22	   18.73	     366	
+     428,897	      	    1.42	       8	   13.03	     667	
+     428,898	      	    1.45	       9	   13.37	     761	
+     428,899	 Prime	    1.42	       8	   13.06	     758	
+     428,900	      	    1.46	       8	   13.68	     799	
+     428,901	      	    1.42	       7	   12.73	     804	
+     428,902	      	    1.45	       8	   12.37	     662	
+     428,903	      	    1.42	       7	   14.22	     948	
+     428,904	      	    1.47	       8	   12.38	     329	
+     428,905	      	    1.42	       7	   13.50	     765	
+     428,906	      	    1.45	       9	   13.11	     449	
+     428,907	      	    1.42	       7	   13.45	     660	
+     428,908	      	    1.46	       8	   13.52	     865	
+     428,909	      	    1.74	      10	   12.73	     400	
+     428,910	      	    1.45	       9	   12.37	     361	
+     428,911	      	    1.42	       7	   13.69	     959	
+     428,912	      	    1.47	       9	   12.45	     299	
+     428,913	      	    1.42	       7	   12.34	     570	
+     428,914	      	    1.45	       9	   12.73	     547	
+     428,915	      	    1.42	       9	   13.01	     732	
+     428,916	      	    1.47	       9	   13.95	     995	
+     428,917	      	    1.42	       7	   12.93	     860	
+     428,918	      	    1.45	       7	   12.77	     315	
+     428,919	      	    1.42	       8	   12.69	     436	
+     428,920	      	    1.47	       9	   12.51	     397	
+     428,921	      	    1.42	       8	   13.39	     508	
+     428,922	      	    3.04	      40	   50.00	     326	
+     428,923	      	    1.42	       8	   12.55	     484	
+     428,924	      	    1.46	       8	   12.34	     679	
+     428,925	      	    1.42	       7	   12.79	     543	
+     428,926	      	    1.45	       8	   13.18	     790	
+     428,927	      	    1.42	       7	   13.02	     594	
+     428,928	      	    1.48	       8	   13.36	     833	
+     428,929	      	    1.42	       7	   14.14	    1041	
+     428,930	      	    1.45	       8	   13.55	    1004	
+     428,931	      	    1.42	       8	   13.94	     858	
+     428,932	      	    1.46	       8	   13.61	     858	
+     428,933	      	    1.42	       7	   12.51	     513	
+     428,934	      	    1.45	       8	   12.83	     681	
+     428,935	      	    1.74	      10	   13.22	     547	
+     428,936	      	    1.47	       9	   12.77	     467	
+     428,937	      	    1.42	       7	   14.03	     757	
+     428,938	      	    1.45	       8	   13.03	     377	
+     428,939	      	    1.42	       7	   12.93	     733	
+     428,940	      	    1.46	       9	   13.65	     728	
+     428,941	      	    1.42	       8	   14.30	    1055	
+     428,942	      	    1.45	       8	   13.93	    1028	
+     428,943	      	    1.42	       8	   12.97	     584	
+     428,944	      	    1.47	       8	   13.69	     896	
+     428,945	      	    1.42	       7	   13.52	     813	
+     428,946	      	    1.45	       8	   13.68	     999	
+     428,947	      	    1.42	       8	   13.55	     877	
+     428,948	      	    2.21	      17	   15.92	    1170	
+     428,949	      	    1.42	       7	   15.44	    1535	
+     428,950	      	    1.45	       8	   12.99	     685	
+     428,951	 Prime	    1.42	       8	   14.19	    1069	
+     428,952	      	    1.47	       8	   12.75	     585	
+     428,953	      	    1.42	       7	   13.71	     919	
+     428,954	      	    1.45	       8	   13.90	     975	
+     428,955	      	    1.42	       8	   12.66	     600	
+     428,956	      	    1.46	       8	   13.51	     868	
+     428,957	 Prime	    1.42	       9	   13.39	     868	
+     428,958	      	    1.45	       8	   12.90	     858	
+     428,959	      	    1.42	       8	   13.76	    1001	
+     428,960	      	    1.48	       9	   12.86	     557	
+     428,961	      	    1.74	      12	   14.18	     789	
+     428,962	      	    1.45	       8	   12.78	     561	
+     428,963	      	    1.42	       7	   13.57	     772	
+     428,964	      	    1.46	       8	   15.00	    1216	
+     428,965	      	    1.42	       7	   13.17	     879	
+     428,966	      	    1.45	       7	   13.96	    1047	
+     428,967	      	    1.42	       7	   13.63	     946	
+     428,968	      	    1.47	       9	   14.72	    1322	
+     428,969	      	    1.42	       7	   14.41	    1083	
+     428,970	      	    1.45	       8	   14.03	    1034	
+     428,971	      	    1.42	       9	   13.35	     819	
+     428,972	      	    1.46	       8	   13.79	     882	
+     428,973	      	    1.42	       9	   14.59	    1125	
+     428,974	      	    1.96	      15	   13.42	     747	
+     428,975	      	    1.42	       7	   12.88	     848	
+     428,976	      	    1.48	       9	   13.38	     781	
+     428,977	 Prime	    1.42	       8	   13.42	     865	
+     428,978	      	    1.45	       8	   13.63	     954	
+     428,979	      	    1.42	       8	   12.76	     719	
+     428,980	      	    1.46	       8	   12.11	     537	
+Worst was 40 for M=428922
+Done
+Exercise 3-4 Prime Number exercise
+       M	   Separate Chaining	Open Addressing w/ Remove	
+     512	               0.001	               0.003	
+   1,024	               0.001	               0.013	
+   2,048	               0.003	               0.086	
+Exercise 3-5 Open Addressing with Marked Elements as deleted.
+Each emitted row contains an operation more costly than any before...
+                Word	         N	      cost	
+            abalones	        62	    0.0012	
+            absinths	       768	    0.0030	
+      accumulatively	     1,536	    0.0050	
+          addressful	     3,072	    0.0055	
+           aladinist	     6,144	    0.0212	
+             anthoid	    12,288	    0.0941	
+          basirhinal	    24,576	    0.1880	
+        cincinnatian	    49,152	    0.2754	
+            flabella	    98,304	    0.8850	
+                peps	   196,608	    1.5913	
+Normal:6.199034690856934
+                Word	         N	      cost	
+            abducing	       226	    0.0010	
+               absit	       769	    0.0018	
+    accumulativeness	     1,537	    0.0020	
+              alaite	     6,147	    0.0020	
+             alalite	     6,150	    0.0020	
+           antholite	    12,290	    0.0021	
+           anthology	    12,303	    0.0021	
+          anthomania	    12,306	    0.0023	
+             basking	    24,609	    0.0026	
+    basommatophorous	    24,620	    0.0026	
+               bejel	    26,559	    0.0039	
+       belittlements	    26,734	    0.7014	
+         heteroecism	   119,440	    0.9288	
+         riotousness	   235,279	    1.3806	
+delta=512, Normal:5.541974306106567
+                Word	         N	      cost	
+                   a	         1	    0.0010	
+        abirritative	       376	    0.0010	
+         absentation	       736	    0.0011	
+              absohm	       771	    0.0016	
+      africanthropus	     4,751	    0.0016	
+           algorisms	     6,853	    0.0018	
+           antholite	    12,290	    0.0019	
+          anthotaxis	    12,333	    0.0020	
+      anthropometric	    12,461	    0.0026	
+             bedemen	    25,779	    0.0040	
+              cinnyl	    49,263	    0.0061	
+                cosh	    59,602	    0.8034	
+          micropenis	   160,720	    0.9156	
+            trollops	   287,074	    1.3856	
+delta=256, Normal:5.65794825553894
+                Word	         N	      cost	
+          abirritant	       373	    0.0010	
+              absohm	       771	    0.0010	
+    accumulativeness	     1,537	    0.0010	
+               addie	     3,025	    0.0011	
+            adductor	     3,092	    0.0011	
+            affinely	     4,567	    0.0011	
+             algebar	     6,774	    0.0011	
+            alkahest	     7,054	    0.0011	
+           anarchism	    10,182	    0.0018	
+               basto	    24,728	    0.0031	
+          batrachoid	    24,903	    0.0036	
+        clarinetists	    50,139	    0.0071	
+           flamingos	    98,507	    0.0079	
+          hurtingest	   123,918	    0.8915	
+       sanitationist	   239,757	    1.3417	
+delta=128, Normal:4.620535612106323
+                Word	         N	      cost	
+             abalone	        61	    0.0010	
+           abnormity	       483	    0.0010	
+         abscondedly	       721	    0.0011	
+          accordable	     1,421	    0.0011	
+               acoin	     2,186	    0.0016	
+            cinquain	    49,264	    0.0019	
+        cloudberries	    51,191	    0.0066	
+                 dag	    66,087	    0.6278	
+           mouthroot	   167,205	    1.0744	
+             uncried	   293,559	    1.4453	
+delta=64, Normal:5.596794366836548
+                Word	         N	      cost	
+            abatable	       116	    0.0010	
+          abhorrible	       313	    0.0016	
+              aeaean	     4,050	    0.0020	
+                bawl	    25,080	    0.0021	
+          clavellate	    50,316	    0.0050	
+          inordinary	   132,508	    0.9509	
+         sigillistic	   250,450	    1.3225	
+delta=32, Normal:4.771403074264526
+                Word	         N	      cost	
+       abiogenically	       357	    0.0016	
+       bastardliness	    24,698	    0.0016	
+               beeve	    26,132	    0.0036	
+             doomful	    78,882	    0.7951	
+              ouches	   184,206	    1.0147	
+            wispiest	   316,869	    1.4059	
+delta=16, Normal:5.6497602462768555
+                Word	         N	      cost	
+              abacay	        36	    0.0010	
+       absquatulates	       842	    0.0010	
+  aceanthrenequinone	     1,584	    0.0011	
+         actuarially	     2,799	    0.0016	
+         aldermanate	     6,530	    0.0016	
+          algophobia	     6,847	    0.0016	
+          antibaryon	    12,636	    0.0020	
+           bealtared	    25,254	    0.0021	
+              cleche	    50,490	    0.0053	
+           metrician	   160,021	    1.0198	
+            trioxide	   286,375	    1.4520	
+delta=8, Normal:5.083629846572876
+                Word	         N	      cost	
+               abamp	        64	    0.0011	
+        addictedness	     3,019	    0.0016	
+         adenography	     3,174	    0.0019	
+       circumference	    49,440	    0.0020	
+     housewifeliness	   123,220	    0.9674	
+                salp	   239,059	    1.4886	
+delta=4, Normal:4.841864347457886
+Exercise 3-6 Compare incremental resize strategy against geometric resizing.
+HashtableOpenAddressingRemove in ch07.challenge
+Exercise 3-7 Incorporate logic to shrink hashtable storage once below 25% full.
+can be 1,2,3,4: 1
+must be 1: 1
+Exercise 3-8 Find value in list that is duplicated the most (return any if ties).
+      Hashtable Type	   Build	Remove All	
+    Open Addressing:	   0.071	   0.043	
+  Separate Chaining:	   3.804	   1.032	
+Exercise 3-9 Compare open addressing vs. separate chaining with deletions.

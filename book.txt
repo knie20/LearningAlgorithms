@@ -1,0 +1,1034 @@
+trying to continue without matplotlib.pyplot
+ch01: 2023-11-09 00:06:45.914934
+[13, 2, 18, 7, 50] -> 50
+[-19, -236, -17, -204, -97, -20, -928, -454, -92, -19] -> -17
+[1, 2, 3, 4, 5, '...', 999998, 999999, 1000000] -> 1000000
+Figure 1-1 Three different problem instances processed by an algorithm
+
+           N	   Ascending	  Descending	
+         100	       0.001	       0.001	
+       1,000	       0.010	       0.007	
+      10,000	       0.078	       0.076	
+     100,000	       0.918	       0.820	
+   1,000,000	       9.053	       8.293	
+Table 1-1. Executing max() on two kinds of problem instances of size N (time in ms)
+
+ 	  1 | 5 | 2 | 9 | 3 |   |
+ 	 [1]|[5]| 2 |[9]| 3 | 4 |
+
+Figure 1-2 Visualizing the execution of flawed()
+	  1	5	2	9	3	4
+
+1	1 < 1?	5 < 1?	2 < 1?	9 < 1?	
+5	1 < 5?	5 < 5?	2 < 5?	9 < 5?	
+2		5 < 2?		9 < 2?	
+9		5 < 9?		9 < 9?	
+3				9 < 3?	
+4				9 < 4?	
+
+Figure 1-3 Visualizing the execution of alternate()
+	  9	5	2	1	3	4
+
+9	9 < 9?	
+5	9 < 5?	
+2	9 < 2?	
+1	9 < 1?	
+3	9 < 3?	
+4	9 < 4?	
+
+	  1	2	3	4	5	9
+
+1	1 < 1?	2 < 1?	3 < 1?	4 < 1?	5 < 1?	9 < 1?	
+2	1 < 2?	2 < 2?	3 < 2?	4 < 2?	5 < 2?	9 < 2?	
+3		2 < 3?	3 < 3?	4 < 3?	5 < 3?	9 < 3?	
+4			3 < 4?	4 < 4?	5 < 4?	9 < 4?	
+5				4 < 5?	5 < 5?	9 < 5?	
+9					5 < 9?	9 < 9?	
+
+Figure 1-4 Visualizing the execution of alternate() on best and worst cases
+       N	     #Less	         #LessA	   largest	 alternate	
+       8	         7	             43	     0.001	     0.001	
+      16	        15	            151	     0.001	     0.003	
+      32	        31	            559	     0.001	     0.010	
+      64	        63	          2,143	     0.003	     0.033	
+     128	       127	          8,383	     0.005	     0.127	
+     256	       255	         33,151	     0.009	     0.500	
+     512	       511	        131,839	     0.020	     2.022	
+   1,024	     1,023	        525,823	     0.042	     8.632	
+   2,048	     2,047	      2,100,223	     0.085	    33.833	
+
+largest [(2, 0.9997912079557812, 0.000545303759613127, 4.141369874728274e-05, -0.000334577851054292)]
+Alternate [(5, 0.9999832949191565, 0.062069434531795496, 8.027745385998278e-06, 8.999092288616271e-05)]
+Table 1-2. Comparing largest() with alternate() on worst case problem instances
+
+Figure 1-5 Relationship between #Less-Than and runtime performance
+       N	  LargestW	      MaxW	  LargestB	      MaxB	
+   4,096	      0.17	      0.04	      0.13	      0.04	
+   8,192	      0.40	      0.09	      0.25	      0.08	
+  16,384	      0.73	      0.19	      0.57	      0.20	
+  32,768	      1.50	      0.37	      1.12	      0.36	
+  65,536	      3.16	      0.82	      2.46	      0.94	
+ 131,072	      8.28	      2.69	      5.99	      2.68	
+ 262,144	     15.96	      5.93	     11.78	      5.96	
+ 524,288	     32.91	     11.76	     24.58	     11.98	
+Table 1-3. Performance of largest() and max() on best and worst cases
+
+      Algorithm	 Ascending	Descending	Alternating	
+    largest_two	   524,287	 1,048,573	 1,048,573	
+    sorting_two	   524,287	   524,287	 2,948,953	
+     double_two	 1,572,860	 1,048,573	 1,048,574	
+    mutable_two	 1,048,573	 1,048,573	 1,048,573	
+ tournament_two	   524,305	   524,305	   524,305	
+Table 1-4. Performance of different approached on 524,288 values in different orders
+
+by hand
+Figure 1-6 A tournament with eight initial values
+by hand
+Figure 1-7 A tournament with 32 values
+        |3|1|4|1|5|9|2|6|
+winner	|3|4|9|6| | | |	Initialize step
+loser	|1|1|5|2| | | |
+	 m       i
+
+winner	|3|4|9|6|4| | |	Advance step 1
+loser	|1|1|5|2|3| | |
+	     m     i
+winner	|3|4|9|6|4|9| |	Advance step 2
+loser	|1|1|5|2|3|6| |
+	         m   i
+winner	|3|4|9|6|4|9|9|	Advance step 3
+loser	|1|1|5|2|3|6|4|
+	             m i
+Figure 1-8 Step-by-step execution of tournament algorithm
+         N	     double_two	    mutable_two	largest_two	sorting_two	 tournament_two	
+     1,024	           0.00	           0.00	      0.00	      0.00	           0.02	
+     2,048	           0.01	           0.01	      0.01	      0.02	           0.04	
+     4,096	           0.01	           0.01	      0.03	      0.06	           0.09	
+     8,192	           0.03	           0.05	      0.06	      0.12	           0.23	
+    16,384	           0.07	           0.11	      0.12	      0.26	           0.44	
+    32,768	           0.13	           0.20	      0.23	      0.57	           0.90	
+    65,536	           0.30	           0.44	      0.51	      1.34	           1.94	
+   131,072	           0.70	           0.87	      1.02	      3.15	           4.22	
+   262,144	           3.10	           3.38	      3.11	      7.97	          10.35	
+   524,288	           7.58	           9.29	      8.36	     19.12	          24.11	
+ 1,048,576	          18.75	          21.13	     19.20	     43.39	          52.96	
+ 2,097,152	          38.39	          45.07	     40.48	     96.07
+Table 1-5. Comparing runtime performance (in ms) of all four algorithms
+
+Figure 1-9 Runtime performance comparison
+       N	  f0	        f1	        f2	        f3	
+     512	   2	       512	     3,584	   262,144	
+   1,024	   2	     1,024	     7,168	 1,048,576	
+   2,048	   2	     2,048	    14,336	 4,194,304	
+
+Table 1-6. Counting operations in four different functions
+
+ch02: 2023-11-09 00:17:43.668510
+Linear = 0.0005957207206208581*N + -0.012833332413134054
+Quadratic = 3.2067451847438965e-09*N*N + 0.0005625318766788093*N
+N Log N = [4.48161717e-05]*N*log N
+       N	  Actual	   Model	
+     100	   0.063	   0.047	
+   1,000	   0.565	   0.583	
+  10,000	   5.946	   5.944	
+PearsonRResult(statistic=0.9999862018680474, pvalue=0.0033443041447369405)
+Table 2-1. Prototype runtime performance
+
+Linear    = 0.000440*N + -0.018700
+Quadratic = 3.7586792236429315e-09*N*N + 0.000401003151552048*N
+N Log N   = 0.000033050408*N*log2(N)
+
+           N	      Time	    Linear	      Quad	     NLogN	
+         100	     0.041	     0.025	     0.040	     0.022	
+       1,000	     0.405	     0.422	     0.405	     0.329	
+      10,000	     4.386	     4.384	     4.386	     4.392	
+     100,000	    53.587	    44.012	    77.687	    54.896	
+   1,000,000	   941.628	   440.288	  4159.682	   658.746	
+  10,000,000	 11777.873	  4403.044	379877.954	  7685.376	
+Linear PearsonRResult(statistic=0.9998098883146925, pvalue=5.421024378441814e-08)
+Quad PearsonRResult(statistic=0.9977083176624387, pvalue=7.871694166690764e-06)
+NLogN PearsonRResult(statistic=0.9999836984859483, pvalue=3.9860687459175227e-10)
+[(4, 0.9999989295958466, 6.789861881858631, 7.207928512816972e-05, -0.0004982917256955082), (5, 0.9999948740489826, 15.62802615672383, 2.6707656244307052e-11, 0.0009107146152013942), (3, 0.9999836984859481, 30.312183436934667, 5.0624119825907296e-05), (2, 0.9998098883146924, 84.39121635680611, 0.0011818753529283603, -59.00251734046537)]
+Table 2-2. Comparing different mathematical models against actual performance
+
+Karatsuba=3.1686310051704137e-07*N^1.585
+TK=2.55755443914036e-07*N^1.585+7.433793853984268e-06*N
+
+       N	        Time	      Linear	        Quad	   Karatsuba	         TKN	
+     256	      0.0035	     -0.0046	      0.0048	      0.0021	      0.0036	
+     512	      0.0127	      0.0063	      0.0103	      0.0062	      0.0088	
+   1,024	      0.0163	      0.0283	      0.0236	      0.0187	      0.0227	
+   2,048	      0.0639	      0.0722	      0.0592	      0.0561	      0.0605	
+   4,096	      0.1658	      0.1600	      0.1666	      0.1684	      0.1664	
+   8,192	      0.5527	      0.3356	      0.5260	      0.5052	      0.4687	
+  16,384	      1.9724	      0.6867	      1.8233	      1.5155	      1.3451	
+  32,768	      6.9368	      1.3891	      6.7320	      4.5466	      3.9134	
+  65,536	     20.9331	      2.7937	     25.8055	     13.6399	     11.4966	
+ 131,072	     49.0626	      5.6031	    100.9771	     40.9198	     34.0027	
+ 262,144	    183.7096	     11.2218	    399.4183	    122.7593	    101.0336	
+Table 2-3. Multiplying two n-digit integers
+
+Excel plot
+Figure 2-1 Compare models against performance
+              N	              X	       Y	  X_slow	  X_fast	  Y_fast	X_fastest	
+              4	             20	   4,040	     0.0	     0.0	     2.7	     0.0	
+              8	             40	   6,060	     0.0	     0.0	     4.0	     0.0	
+             16	             80	   8,080	     0.1	     0.0	     5.4	     0.0	
+             32	            160	  10,100	     0.1	     0.1	     6.7	     0.0	
+             64	            320	  12,120	     0.2	     0.1	     8.1	     0.0	
+            128	            640	  14,140	     0.4	     0.2	     9.4	     0.0	
+            256	          1,280	  16,160	     0.9	     0.4	    10.8	     0.0	
+            512	          2,560	  18,180	     1.7	     0.9	    12.1	     0.0	
+          1,024	          5,120	  20,200	     3.4	     1.7	    13.5	     0.0	
+          2,048	         10,240	  22,220	     6.8	     3.4	    14.8	     0.0	
+          4,096	         20,480	  24,240	    13.7	     6.8	    16.2	     0.0	
+          8,192	         40,960	  26,259	    27.3	    13.7	    17.5	     0.1	
+         16,384	         81,920	  28,280	    54.6	    27.3	    18.9	     0.1	
+         32,768	        163,840	  30,300	   109.2	    54.6	    20.2	     0.2	
+         65,536	        327,680	  32,320	   218.5	   109.2	    21.5	     0.4	
+        131,072	        655,360	  34,340	   436.9	   218.5	    22.9	     0.9	
+        262,144	      1,310,720	  36,360	   873.8	   436.9	    24.2	     1.7	
+        524,288	      2,621,440	  38,380	  1747.6	   873.8	    25.6	     3.5	
+      1,048,576	      5,242,880	  40,400	  3495.3	  1747.6	    26.9	     7.0	
+      2,097,152	     10,485,760	  42,420	  6990.5	  3495.3	    28.3	    14.0	
+      4,194,304	     20,971,520	  44,440	 13981.0	  6990.5	    29.6	    28.0	
+      8,388,608	     41,943,040	  46,460	 27962.0	 13981.0	    31.0	    55.9	
+Figure 2-2 Performance of algorithms X and Y on different computers
+Excel plots
+Figure 2-3 Visualizing the numbers from Figure 2-2
+              N	          log N	         Linear	        N log N	            N^2	            N^3	            2^N	             N!	
+              4	              2	              4	              8	             16	             64	             16	             24	
+              8	              3	              8	             24	             64	            512	            256	         40,320	
+             16	              4	             16	             64	            256	          4,096	         65,536	       2.09e+13	
+             32	              5	             32	            160	          1,024	         32,768	       4.29e+09	       2.63e+35	
+             64	              6	             64	            384	          4,096	        262,144	       1.84e+19	       1.27e+89	
+            128	              7	            128	            896	         16,384	      2,097,152	       3.40e+38	              *
+            256	              8	            256	          2,048	         65,536	     16,777,216	       1.16e+77	              *
+            512	              9	            512	          4,608	        262,144	       1.34e+08	              *	              *
+          1,024	             10	          1,024	         10,240	      1,048,576	       1.07e+09	              *	              *
+          2,048	             11	          2,048	         22,528	      4,194,304	       8.59e+09	              *	              *
+Table 2-4. Growth of different computations
+
+by hand
+Figure 2-4 Doors of destiny!
+by hand
+Figure 2-5 Searching for 53 in a sorted array that contains the value.
+by hand
+Figure 2-6 Searching for 17 in a sorted array that does not contain the value.
+by hand
+Figure 2-7 All complexity classes are arranged in dominance hierarchy
+Figure 2-8 Runtime performance plotted against problem instance size for complexity classes
+ch03: 2023-11-09 01:02:03.776880
+   February 2024    
+Su Mo Tu We Th Fr Sa
+             1  2  3 
+ 4  5  6  7  8  9 10 
+11 12 13 14 15 16 17 
+18 19 20 21 22 23 24 
+25 26 27 28 29 
+day_array = [-1, 31, -1, -1, -1, -1, 30, -1, 31, -1, 31, -1, -1, 31, -1, -1, -1, -1, 28, 30, -1, 30, -1, 31, 31, 31, -1, -1, -1, -1, -1, -1, -1, 30]
+Figure 3-1. Array containing month lengths interspersed with unneeded -1 values
+
+     key	           hash(key)	      hash(key) % 15	
+       a	 4171029237462519254	                  14	
+    rose	-4604908903286188057	                   8	
+      by	 7324740560995464241	                   1	
+     any	-8512654032700703230	                   5	
+   other	-2398459676481046003	                   2	
+    name	-6281824099445047666	                  14	
+   would	-2999517267347615732	                  13	
+   smell	 7859700960161895657	                  12	
+      as	-4505901727403817292	                   8	
+   sweet	-2258183792788461704	                   1	
+Table 3-1. Example hash() and hash code expressions for a table of size 15 (because of salting will be different from book)
+
+ --  --  --  --  --  --  20         20 %  7 =  6
+ --  15  --  --  --  --  20         15 %  7 =  1
+ --  15  --  --  --   5  20          5 %  7 =  5
+ 26  15  --  --  --   5  20         26 %  7 =  5
+ 26  15  19  --  --   5  20         19 %  7 =  5
+Figure 3-2. Structure of Hashtable storage after adding five (key, value) entries
+
+       N	   8,192	  16,384	  32,768	  65,536	 131,072	 262,144	 524,288	 1,048,576	
+      32	   0.200	   0.156	   0.145	   0.119	   0.158	   0.168	   0.158	     0.128	
+      64	   0.240	   0.150	   0.125	   0.129	   0.141	   0.114	   0.122	     0.135	
+     128	   0.361	   0.109	   0.113	   0.128	   0.164	   0.122	   0.105	     0.123	
+     256	   0.592	   0.206	   0.241	   0.151	   0.142	   0.122	   0.146	     0.137	
+     512	   1.078	   0.540	   0.353	   0.204	   0.184	   0.166	   0.133	     0.126	
+   1,024	   2.253	   0.949	   0.499	   0.262	   0.273	   0.184	   0.148	     0.140	
+   2,048	   3.388	   2.589	   1.063	   0.523	   0.359	   0.276	   0.231	     0.162	
+   4,096	   8.716	   4.936	   2.654	   1.056	   0.753	   0.379	   0.248	     0.202	
+   8,192	       *	   8.212	   4.386	   2.434	   1.340	   0.689	   0.450	     0.286
+  16,384	       *	       *	  10.631	   4.905	   2.542	   1.313	   0.698	     0.389
+  32,768	       *	       *	       *	  11.860	   4.884	   2.578	   1.291	     0.799
+Table 3-2. Average performance to insert N keys into a Hashtable of size M (in milliseconds)
+
+        20 %  7 =  6  --  --  --  --  --  -- [x]
+                                              20  
+
+        15 %  7 =  1  -- [x]  --  --  --  -- [x]
+                          15                  20  
+                                                  
+
+         5 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15               5  20  
+                                                  
+
+        26 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15              26  20  
+                                           5      
+                                                  
+
+        19 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15              19  20  
+                                          26      
+                                           5      
+                                                  
+
+Figure 3-3. Structure of Hashtable linked list storage after adding five (key, value) pairs
+
+hand-drawn image
+Figure 3-4. Removing the first node in a linked list
+
+hand-drawn image
+Figure 3-5. Removing any other node in a linked list
+
+         M	  Avg LL	  Max LL	  Avg OA	  Max OA	
+ 6,422,580	     1.0	       4	     1.1	       6	
+   642,258	     1.3	       7	     3.0	      45	
+   610,145	     1.3	       7	     3.3	      52	
+   579,637	     1.3	       6	     3.6	      51	
+   550,655	     1.3	       7	     4.1	      59	
+   523,122	     1.3	       7	     4.6	      73	
+   496,965	     1.4	       7	     5.4	     102	
+   472,116	     1.4	       7	     6.5	     117	
+   448,510	     1.4	       8	     8.0	     148	
+   426,084	     1.4	       7	    10.2	     156	
+   404,779	     1.4	       7	    14.1	     230	
+   384,540	     1.5	       8	    21.2	     478	
+   365,313	     1.5	       8	    38.1	     700	
+   347,047	     1.5	       9	    90.8	    1590	
+   329,694	     1.6	       8	   625.0	    6774	
+   313,209	     1.6	       8	       *	       *
+   187,925	     2.1	      10	       *	       *
+   112,755	     3.0	      12	       *	       *
+    67,653	     4.8	      16	       *	       *
+    40,591	     7.9	      24	       *	       *
+    24,354	    13.2	      32	       *	       *
+Table 3-3. Average performance when inserting N=321,129 keys into a Hashtable of size M as M decreases in size
+
+The result of plotting Table 3-3
+Figure 3-6. For a fixed number of elements, N, the average and maximum chain length follow predictable paths
+
+ --  --  --  --  --  --  20         20 %  7 =  6
+ --  15  --  --  --  --  20         15 %  7 =  1
+ --  15  --  --  --   5  20          5 %  7 =  5
+ 26  15  --  --  --   5  20         26 %  7 =  5
+ 26  15  19  --  --   5  20         19 %  7 =  5
+        20 %  7 =  6  --  --  --  --  --  -- [x]
+                                              20  
+
+        15 %  7 =  1  -- [x]  --  --  --  -- [x]
+                          15                  20  
+                                                  
+
+         5 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15               5  20  
+                                                  
+
+        26 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15              26  20  
+                                           5      
+                                                  
+
+        19 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15              19  20  
+                                          26      
+                                           5      
+                                                  
+
+The above are original before resize.
+Figure 3-7. Some entries can get "lost" if they are simply copied when M increases
+
+ --  --  --  --  --  --  20         20 %  7 =  6
+ --  15  --  --  --  --  20         15 %  7 =  1
+ --  15  --  --  --   5  20          5 %  7 =  5
+ 26  15  --  --  --   5  20         26 %  7 =  5
+ 26  15  19  --  --   5  20         19 %  7 =  5
+
+ 15  --  --  --  19   5  20  --  --  --  --  26  --  --  --
+        20 %  7 =  6  --  --  --  --  --  -- [x]
+                                              20  
+
+        15 %  7 =  1  -- [x]  --  --  --  -- [x]
+                          15                  20  
+                                                  
+
+         5 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15               5  20  
+                                                  
+
+        26 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15              26  20  
+                                           5      
+                                                  
+
+        19 %  7 =  5  -- [x]  --  --  -- [x] [x]
+                          15              19  20  
+                                          26      
+                                           5      
+                                                  
+
+                      [x]  --  --  -- [x] [x]  --  --  --  --  -- [x]  --  --  --
+                      15              19  20                      26              
+                                           5                                      
+                                                                                  
+
+The above are original before resize.
+Figure 3-8. Resulting Hashtable storage after successful resizing
+
+The following table takes hours to generate. Remove arguments for full table shown in book.
+       M	   BuildLL	  AccessLL	   BuildOA	  AccessOA	
+     625	     2.107	     0.359	     2.443	     0.524	
+   1,250	     2.109	     0.389	     2.582	     0.418	
+   2,500	     1.907	     0.309	     2.618	     0.535	
+   5,000	     2.262	     0.411	     2.671	     0.512	
+  10,000	     2.257	     0.417	     2.538	     0.486	
+  20,000	     2.071	     0.379	     2.092	     0.495	
+  40,000	     1.958	     0.368	     2.192	     0.437	
+  80,000	     1.831	     0.343	     2.253	     0.467	
+ 160,000	     1.922	     0.343	     2.158	     0.511	
+ 320,000	     1.408	     0.362	     1.589	     0.468	
+ 640,000	     0.630	     0.233	     0.645	     0.387	
+   Fixed	     0.757	     0.327	     1.198	     0.730	
+Table 3-4. Comparing growing tables against fixed-size construction
+
+                Word	         M	         N	   #insert	   average	
+            absinths	     1,023	       768	     1,536	      2.00	
+      accumulatively	     2,047	     1,536	     3,840	      2.50	
+          addressful	     4,095	     3,072	     8,448	      2.75	
+           aladinist	     8,191	     6,144	    17,664	      2.88	
+             anthoid	    16,383	    12,288	    36,096	      2.94	
+          basirhinal	    32,767	    24,576	    72,960	      2.97	
+        cincinnatian	    65,535	    49,152	   146,688	      2.98	
+            flabella	   131,071	    98,304	   294,144	      2.99	
+                peps	   262,143	   196,608	   589,056	      3.00	
+            zyzzyvas	   524,287	   321,129	   713,577	      2.22	
+       zyzzyvas72087	   524,287	   393,216	 1,178,880	      3.00	
+Table 3-5. Words whose addition causes a resize event, with total # of insertions and average number of times a word was inserted
+
+Additional computations for perfect hashing for shakespeare example
+hash_f('a', S1)=9
+9 * 97 % 12 = 873 % 12 = 9
+
+hash_f('a', S2)=2
+2 * 97 % 12 = 194 % 12 = 2
+G[9] = 11
+G[2] = 1
+
+a -> a at index position 0
+hash_f('by', S1)=10
+9 * 98 + 4 * 121 % 12 = 1,366 % 12 = 10
+
+hash_f('by', S2)=2
+2 * 98 + 10 * 121 % 12 = 1,406 % 12 = 2
+G[10] = 1
+G[2] = 1
+
+by -> by at index position 37778
+Additional computations for perfect hashing
+hash_f('by', S1)=108103
+394,429 * 98 + 442,829 * 121 % 667,596 = 92,236,351 % 667,596 = 108,103
+
+hash_f('by', S2)=430736
+14,818 * 98 + 548,808 * 121 % 667,596 = 67,857,932 % 667,596 = 430,736
+G[108,103] = 561026
+G[430,736] = 144348
+
+by -> by at index position 37778
+hash_f('watered', S1)=227399
+394,429 * 119 + 442,829 * 97 + 389,061 * 116 + 136,566 * 101 + 537,577 * 114 + 558,931 * 101 + 481,136 * 100 % 667,596 = 314,665,115 % 667,596 = 227,399
+
+hash_f('watered', S2)=337140
+14,818 * 119 + 548,808 * 97 + 42,870 * 116 + 468,503 * 101 + 590,735 * 114 + 445,137 * 101 + 97,305 * 100 % 667,596 = 229,322,568 % 667,596 = 337,140
+G[227,399] = 0
+G[337,140] = 313794
+
+watered -> watered at index position 313794
+hash_f('not-a-word', S1)=571865
+394,429 * 110 + 442,829 * 111 + 389,061 * 116 + 136,566 * 45 + 537,577 * 97 + 558,931 * 45 + 481,136 * 119 + 337,378 * 111 + 395,026 * 114 + 636,436 * 100 % 667,596 = 424,495,325 % 667,596 = 571,865
+
+hash_f('not-a-word', S2)=407348
+14,818 * 110 + 548,808 * 111 + 42,870 * 116 + 468,503 * 45 + 590,735 * 97 + 445,137 * 45 + 97,305 * 119 + 627,438 * 111 + 8,414 * 114 + 453,622 * 100 % 667,596 = 293,481,992 % 667,596 = 407,348
+G[571,865] = 0
+G[407,348] = 313794
+
+not-a-word -> not-a-word at index position 313794
+Open Addressing	Separate Chaining	Perfect Hash	
+      as	   sweet	       a	
+   sweet	       a	     any	
+       a	   other	      as	
+     any	     any	      by	
+   other	      as	    name	
+    name	   smell	   other	
+   smell	    name	    rose	
+   would	   would	   smell	
+    rose	      by	   sweet	
+      by	    rose	   would	
+Table 3-6. Order of words returned by hashtable iterators
+
+ch04: 2023-11-09 01:11:56.536341
+Redrawn by artist
+Figure 4-1. Waiting in a queue at a nightclub
+
+Redrawn by artist
+Figure 4-2. modeling a nightclub queue with three nodes
+
+Redrawn by artist
+Figure 4-3. Patrons can advance quicker with a purchased pass
+
+       N	    Heap	  OrderL	  Linked	  OrderA	Built-in	   Array	
+     256	     6.5	     3.1	     4.6	     4.3	     7.3	     7.5	
+     512	     5.0	     3.2	     4.0	     7.5	    12.5	    22.6	
+   1,024	     5.4	     2.2	    10.4	    12.1	    31.3	    40.7	
+   2,048	     7.5	     3.2	    22.9	    27.7	    62.8	    92.5	
+   4,096	     7.4	     5.1	    46.0	    51.8	   147.1	   235.9	
+   8,192	    10.4	     7.9	    66.0	    95.1	   166.1	   245.9	
+  16,384	    11.5	    13.7	   125.9	   122.2	   355.2	   527.3	
+
+Heap (2, 0.9245623960454943, 0.865424651752719, 0.00038626658303873027, 5.8859699968091155)
+OrderL [(3, 0.9933212410824683, 2.0100118013992287, 6.484835322519174e-05), (2, 0.9920722197637859, 0.4761394685787386, 0.0006914021419651314, 2.260548870897434)]
+Linked [(2, 0.9936292898274811, 4.625617652481111, 0.007501698058982931, 5.131888246503269)]
+OrderA (2, 0.9637620116349969, 11.475855153621717, 0.007626231490819757, 10.399134054972567)
+Built-in (2, 0.9839285186457621, 20.592166629643348, 0.020871622820470837, 14.817612607559358)
+Array (2, 0.9772076016766448, 36.64804354095872, 0.031031164436840286, 23.358805086032657)
+Table 4-1. Average operation performance (time in ns) on problem instances of size N
+
+Generated by Excel
+Figure 4-4. O(log N) behavior of Heap outperforms O(N) behavior for other approaches
+
+level 0	  15 
+level 1	  13 |  14 
+level 2	   9 |  11 |  12 |  14 
+level 3	   8 |   2 |   1 |  10 |   8 |   6 |   9 |   7 
+level 4	   4 |   5 
+Hand drawn
+Figure 4-5. A sample max binary heap
+
+Hand drawn
+Figure 4-6. Determining levels needed for a binary heap with N entries
+
+Hand drawn
+Figure 4-7. Which of these are valid binary max heaps?
+
+Hand drawn
+Figure 4-8. The first step to inserting an entry is to place it in the next available position
+
+Hand drawn
+Figure 4-9. The second step is to swim the entry up one level as needed
+
+level 0	  15 
+level 1	  13 |  14 
+level 2	  12 |  11 |  12 |  14 
+level 3	   8 |   9 |   1 |  10 |   8 |   6 |   9 |   7 
+level 4	   4 |   5 |   2 
+Hand drawn
+Figure 4-10. Third step swims the entry up one level as needed
+
+level 0	  16 
+level 1	  15 |  14 
+level 2	  13 |  11 |  12 |  14 
+level 3	   8 |  12 |   1 |  10 |   8 |   6 |   9 |   7 
+level 4	   4 |   5 |   2 |   9 
+Hand drawn
+Figure 4-11. Adding an entry with priority 16 swims up to the top
+
+Hand drawn
+Figure 4-12. The first step is to remove bottommost entry
+
+Hand drawn
+Figure 4-13. Broken heap resulting from swapping last entry with level 0
+
+Hand drawn
+Figure 4-14. Swap top entry with its left child which had a higher priority
+
+Hand drawn
+Figure 4-15. Sink down an additional level
+
+level 0	  15 
+level 1	  13 |  14 
+level 2	  12 |  11 |  12 |  14 
+level 3	   8 |   9 |   1 |  10 |   8 |   6 |   9 |   7 
+level 4	   4 |   5 |   2 
+Hand drawn
+Figure 4-16. Resulting heap after sinking entry to its proper location
+
+ -- |  15 |  13 |  14 |  12 |  11 |  12 |  14 |   8 |   9 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |   2 
+Hand drawn
+Figure 4-17. Storing a max binary heap in an array
+
+Fig. 4-8  :   -- |  15 |  13 |  14 |   9 |  11 |  12 |  14 |   8 |   2 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |  12 
+
+Fig. 4-9  :   -- |  15 |  13 |  14 |   9 |  11 |  12 |  14 |   8 |  12 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |   2 
+Fig. 4-10 :   -- |  15 |  13 |  14 |  12 |  11 |  12 |  14 |   8 |   9 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |   2 
+Figure 4-18. Changes to storage after enqueue in Figure 4-8
+
+Fig. 4-11 :   -- |  16 |  15 |  14 |  13 |  11 |  12 |  14 |   8 |  12 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |   2 |   9 
+Fig. 4-13 :   -- |   9 |  15 |  14 |  13 |  11 |  12 |  14 |   8 |  12 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |   2 
+
+Fig. 4-14 :   -- |  15 |   9 |  14 |  13 |  11 |  12 |  14 |   8 |  12 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |   2 
+Fig. 4-15 :   -- |  15 |  13 |  14 |   9 |  11 |  12 |  14 |   8 |  12 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |   2 
+Fig. 4-16 :   -- |  15 |  13 |  14 |  12 |  11 |  12 |  14 |   8 |   9 |   1 |  10 |   8 |   6 |   9 |   7 |   4 |   5 |   2 
+Figure 4-19. Changes to storage after dequeue in Figure 4-11
+
+Hand drawn
+Figure 4-20. Using an array as a circular queue
+
+Hand drawn
+Figure 4-21. A novel factorial heap structure
+
+ch05: 2023-11-09 02:26:34.307377
+ 15 | 21 | 20 |  2 | 15 | 24 |  5 | 19 
+  2 | 21 | 20 | 15 | 15 | 24 |  5 | 19 
+  2 | 21 | 20 | 15 | 15 | 19 |  5 | 24 
+  2 |  5 | 20 | 15 | 15 | 19 | 21 | 24 
+  2 |  5 | 20 | 15 | 15 | 19 | 21 | 24 
+  2 |  5 | 15 | 15 | 20 | 19 | 21 | 24 
+  2 |  5 | 15 | 15 | 20 | 19 | 21 | 24 
+  2 |  5 | 15 | 15 | 19 | 20 | 21 | 24 
+Figure 5-1. Sample array, A, to sort
+
+ 15 | 21 | 20 |  2 | 15 | 24 |  5 | 19 
+  2 | 21 | 20 | 15 | 15 | 24 |  5 | 19 
+  2 |  5 | 20 | 15 | 15 | 24 | 21 | 19 
+  2 |  5 | 15 | 20 | 15 | 24 | 21 | 19 
+  2 |  5 | 15 | 15 | 20 | 24 | 21 | 19 
+  2 |  5 | 15 | 15 | 19 | 24 | 21 | 20 
+  2 |  5 | 15 | 15 | 19 | 20 | 21 | 24 
+  2 |  5 | 15 | 15 | 19 | 20 | 21 | 24 
+Figure 5-2. Sorting sample array using Selection Sort
+
+By hand
+Figure 5-3. Visualizing the formula for triangle numbers: sum of 1 through 7 is 28
+
+ 15 | 21 | 20 |  2 | 15 | 24 |  5 | 19 
+ 15 | 21 | 20 |  2 | 15 | 24 |  5 | 19 
+ 15 | 20 | 21 |  2 | 15 | 24 |  5 | 19 
+  2 | 15 | 20 | 21 | 15 | 24 |  5 | 19 
+  2 | 15 | 15 | 20 | 21 | 24 |  5 | 19 
+  2 | 15 | 15 | 20 | 21 | 24 |  5 | 19 
+  2 |  5 | 15 | 15 | 20 | 21 | 24 | 19 
+  2 |  5 | 15 | 15 | 19 | 20 | 21 | 24 
+Figure 5-4. Sorting sample array using Insertion Sort
+
+Building models for Insertion Sort. This may take awhile...
+Quadratic SS = 3.370462724257558e-08*N*N + 9.712019371233514e-06*N
+Quadratic IS = 6.240210042442097e-08*N*N + -1.5208742353736334e-06*N
+
+           N	    TimeSS	   ModelSS	     MinIS	    TimeIS	     MaxIs	   ModelIS	
+         256	     0.002	     0.005	     0.004	     0.004	     0.004	     0.004	
+         512	     0.009	     0.014	     0.015	     0.015	     0.015	     0.016	
+       1,024	     0.034	     0.045	     0.063	     0.063	     0.063	     0.064	
+       2,048	     0.173	     0.161	     0.260	     0.260	     0.260	     0.259	
+       4,096	     0.603	     0.605	     1.041	     1.041	     1.041	     1.041	
+       8,192	     2.332	     2.341	     3.946	     4.231	     4.551	     4.175	
+      16,384	    10.354	     9.207	    16.682	    17.070	    17.658	    16.726	
+      32,768	    40.661	    36.508	    67.348	    68.821	    70.099	    66.954	
+Figure 5-5. Timing results of Insertion Sort and Selection Sort
+
+Fact(3) =  6
+Done by hand
+Figure 5-6. Visualizing the recursive invocation of fact(3)
+
+Done by hand
+Figure 5-7. Recursive invocation when calling rmax(0,3) on A=[15,21,20,2]
+
+Done by hand
+Figure 5-8. Complete recursive invocation of rmax(0,7)
+
+Done by hand
+Figure 5-9. Merging two stacks into one
+
+Done by hand
+Figure 5-10. Step by step merge sort of two sorted sub-arrays of size 4
+
+ 15 | 21 | 20 |  2 | 15 | 24 |  5 | 19 
+  2 |  5 | 15 | 20 | 15 | 24 | 21 | 19 
+pivot=A[2]=15
+  2 |  5 | 15 | 19 | 15 | 20 | 21 | 24 
+pivot=A[5]=20
+Figure 5-11. Results of partition(A,0,7,0) using A[0] as pivot
+
+Done by hand
+Figure 5-12. Full recursive invocation of Quicksort
+
+ 14 | 13 | 14 | 12 | 11 | 12 |  9 |  8 |  9 |  1 | 10 |  8 |  6 |  2 |  7 |  4 |  5 | 15 
+ 14 | 13 | 12 | 12 | 11 |  8 |  9 |  8 |  9 |  1 | 10 |  5 |  6 |  2 |  7 |  4 | 14 | 15 
+Figure 5-13. Intuition behind how a max binary heap can be used for sorting
+
+ 14 | 13 | 12 |  5 | 10 |  6 | 14 | 12 |  9 |  1 | 11 |  8 | 15 |  9 |  7 |  4 |  8 |  2 
+ 14 | 13 | 12 |  5 | 10 |  6 | 14 | 12 |  9 |  1 | 11 |  8 | 15 |  9 |  7 |  4 |  8 |  2 	1 comparisons
+ 14 | 13 | 12 |  5 | 10 |  6 | 14 | 12 |  9 |  1 | 11 |  8 | 15 |  9 |  7 |  4 |  8 |  2 	3 comparisons
+ 14 | 13 | 12 |  5 | 10 |  6 | 14 | 12 |  9 |  1 | 11 |  8 | 15 |  9 |  7 |  4 |  8 |  2 	5 comparisons
+ 14 | 13 | 12 |  5 | 10 | 15 | 14 | 12 |  9 |  1 | 11 |  8 |  6 |  9 |  7 |  4 |  8 |  2 	7 comparisons
+ 14 | 13 | 12 |  5 | 11 | 15 | 14 | 12 |  9 |  1 | 10 |  8 |  6 |  9 |  7 |  4 |  8 |  2 	9 comparisons
+ 14 | 13 | 12 | 12 | 11 | 15 | 14 |  8 |  9 |  1 | 10 |  8 |  6 |  9 |  7 |  4 |  5 |  2 	13 comparisons
+ 14 | 13 | 15 | 12 | 11 | 12 | 14 |  8 |  9 |  1 | 10 |  8 |  6 |  9 |  7 |  4 |  5 |  2 	17 comparisons
+ 14 | 13 | 15 | 12 | 11 | 12 | 14 |  8 |  9 |  1 | 10 |  8 |  6 |  9 |  7 |  4 |  5 |  2 	19 comparisons
+ 15 | 13 | 14 | 12 | 11 | 12 | 14 |  8 |  9 |  1 | 10 |  8 |  6 |  9 |  7 |  4 |  5 |  2 	23 comparisons
+Figure 5-14. Converting array into a max binary heap
+
+           N	 MergeSort	 Quicksort	  HeapSort	   TimSort	PythonSort	
+         256	     0.001	     0.001	     0.002	     0.001	     0.000	
+         512	     0.001	     0.001	     0.002	     0.001	     0.000	
+       1,024	     0.002	     0.002	     0.006	     0.002	     0.000	
+       2,048	     0.005	     0.003	     0.020	     0.004	     0.000	
+       4,096	     0.009	     0.008	     0.030	     0.021	     0.000	
+       8,192	     0.019	     0.017	     0.091	     0.021	     0.001	
+      16,384	     0.041	     0.035	     0.194	     0.044	     0.002	
+      32,768	     0.137	     0.105	     0.441	     0.094	     0.005	
+      65,536	     0.207	     0.207	     1.159	     0.308	     0.011	
+     131,072	     0.604	     0.478	     2.443	     0.730	     0.028	
+     262,144	     1.366	     1.099	     5.677	     1.480	     0.084	
+     524,288	     3.138	     2.634	    12.728	     3.427	     0.188	
+   1,048,576	     6.760	     5.304	    27.705	     7.747	     0.450	
+NLOGN MS = 9.923073550628267e-07*N*N + -1.0798078092321921e-05*N
+NLOGN QS = 6.343502904984616e-07*N*N + -6.362212014472815e-06*N
+NLOGN HS = 1.469022994290825e-06*N*N + -8.589770733341649e-06*N
+NLOGN TS = -2.2509230971761554e-08*N*N + 3.1695096841811696e-06*N
+NLOGN PS = 1.8834946811127765e-08*N*N + -1.3113277750834928e-07*N
+
+Table 5-1. Runtime performance (in seconds) for different sorting algorithms
+
+	 14 | 13 | 12 |  5 | 10 |  6 | 14 | 12 |  9 |  1 | 11 |  8 | 15 |  9 |  7 |  4 |  8 |  2 
+lo= 0	 14 | 13 | 12 |  5 | 10 |  6 | 14 | 12 |  9 |  1 | 11 |  8 | 15 |  9 |  7 |  4 |  8 |  2 
+lo= 4	  5 | 12 | 13 | 14 | 10 |  6 | 14 | 12 |  9 |  1 | 11 |  8 | 15 |  9 |  7 |  4 |  8 |  2 
+lo= 8	  5 | 12 | 13 | 14 |  6 | 10 | 12 | 14 |  9 |  1 | 11 |  8 | 15 |  9 |  7 |  4 |  8 |  2 
+lo=12	  5 | 12 | 13 | 14 |  6 | 10 | 12 | 14 |  1 |  8 |  9 | 11 | 15 |  9 |  7 |  4 |  8 |  2 
+lo=16	  5 | 12 | 13 | 14 |  6 | 10 | 12 | 14 |  1 |  8 |  9 | 11 |  4 |  7 |  9 | 15 |  8 |  2 
+size= 4	  5 | 12 | 13 | 14 |  6 | 10 | 12 | 14 |  1 |  8 |  9 | 11 |  4 |  7 |  9 | 15 |  2 |  8 
+size= 8	  5 |  6 | 10 | 12 | 12 | 13 | 14 | 14 |  1 |  4 |  7 |  8 |  9 |  9 | 11 | 15 |  2 |  8 
+size=16	  1 |  4 |  5 |  6 |  7 |  8 |  9 |  9 | 10 | 11 | 12 | 12 | 13 | 14 | 14 | 15 |  2 |  8 
+size=32	  1 |  2 |  4 |  5 |  6 |  7 |  8 |  8 |  9 |  9 | 10 | 11 | 12 | 12 | 13 | 14 | 14 | 15 
+Figure 5-15. Changes to array when applying Tim Sort with initial size of 4
+
+ch06: 2023-11-09 02:54:17.369955
+(((3 + 1) / 4) * (((1 + 5) * 9) - (2 * 6))) = 42.0
+in postfix: 3 1 + 4 / 1 5 + 9 * 2 6 * - *
+Figure 6-1. Representing mathematical expressions using expression trees
+
+((1 + 5) * 9) = 54
+Figure 6-2. Visualizing recursive evaluation of ((1+5)*9)
+
+       N	 Prepend	  Remove	  Append	    Tree	
+   1,024	   0.055	   0.008	   0.004	   1.607	
+   2,048	   0.201	   0.846	   0.008	   0.877	
+   4,096	   0.156	   0.907	   0.003	   1.282	
+   8,192	   0.374	   2.954	   0.006	   1.054	
+  16,384	   0.574	   4.000	   0.009	   0.995	
+  32,768	   1.427	   8.173	   0.005	   1.098	
+  65,536	   5.347	  22.581	   0.016	   1.280	
+ 131,072	   5.172	  46.065	   0.076	   2.172	
+ 262,144	  11.613	  25.011	   0.112	   1.353	
+ 524,288	  23.868	  45.494	   0.121	   1.369	
+1,048,576	  93.803	  96.345	   0.404	   1.419	
+Table 6-1. Comparing insert and remove performance of lists against binary search tree (time in ms)
+
+Figure 6-3. Binary Search Tree containing seven values
+
+To insert `19`, create a new subtree with root of `19`.
+To insert `14`, `14` is smaller than or equal to `19`, so insert `14` into the left subtree of `19`, but there is no left subtree, so create a new subtree with root of `14`.
+To insert `15`, `15` is smaller than or equal to `19`, so insert `15` into the left subtree of `19` rooted at `14`. Now `15` is larger than `14`, so insert `15` into the right subtree of `14`, but there is no right subtree, so create a new subtree with root of `15`.
+To insert `53`, `53` is larger than `19`, so insert `53` into the right subtree of `19`, but there is no right subtree, so create a new subtree with root of `53`.
+To insert `58`, `58` is larger than `19`, so insert `58` into the right subtree of `19` rooted at `53`. Now `58` is larger than `53`, so insert `58` into the right subtree of `53`, but there is no right subtree, so create a new subtree with root of `58`.
+To insert `3`, `3` is smaller than or equal to `19`, so insert `3` into the left subtree of `19` rooted at `14`. Now `3` is smaller than or equal to `14`, so insert `3` into the left subtree of `14`, but there is no left subtree, so create a new subtree with root of `3`.
+To insert `26`, `26` is larger than `19`, so insert `26` into the right subtree of `19` rooted at `53`. Now `26` is smaller than or equal to `53`, so insert `26` into the left subtree of `53`, but there is no left subtree, so create a new subtree with root of `26`.
+(19,(14,(3,,),(15,,)),(53,(26,,),(58,,)))
+To insert `29`, `29` is larger than `19`, so insert `29` into the right subtree of `19` rooted at `53`. Now `29` is smaller than or equal to `53`, so insert `29` into the left subtree of `53` rooted at `26`. Now `29` is larger than `26`, so insert `29` into the right subtree of `26`, but there is no right subtree, so create a new subtree with root of `29`.
+(5,(4,(2,(1,,),(3,,)),),(6,,(7,,)))
+Table 6-2. Creating a binary search tree by inserting (in order) 19,14,15,53,58,3,26
+
+Figure 6-4. Insert 29 into the binary search tree example
+
+Figure 6-5. Different binary search trees when same values are inserted in different order
+
+Figure 6-6. Two possible binary search trees after removing 19 from Figure 6-4
+
+Figure 6-7. Removing minimum value in a subtree
+
+Table 6-3. Demonstrating how node is removed from binary search tree
+
+Figure 6-8. Iterating over the values in a binary search tree in ascending order
+
+Figure 6-9. A complete binary tree stores the most values with the least height
+
+0 [3, 15, 26, 58]
+1 [14, 53]
+2 [19]
+
+0 [3, 15, 29, 58]
+1 [14, 26]
+2 [53]
+3 [19]
+
+0 [3, 15, 27, 58]
+1 [14, 29]
+2 [26]
+3 [53]
+4 [19]
+
+Figure 6-10. Unbalanced tree after two insertions.
+
+Figure 6-11. Recursive invocation when inserting a value.
+
+Figure 6-12. Rebalancing this binary search tree by rotating the root node to the right
+
+Figure 6-13. Four different node rotations
+
+Table 6-4. Implementation of rotate left-right
+
+Figure 6-14. Binary search tree as symbol table: keys are atomic numbers; values are element names
+
+Figure 6-15. Binary search tree as priority queue: priorities are atomic numbers; values are element names
+
+(8,(5,(3,(2,(1,,),),(4,,)),(7,(6,,),)),(11,(10,(9,,),),(12,,)))
+Figure 6-16. A Fibonacci tree with twelve nodes
+
+ch07: 2023-11-09 02:59:07.827347
+       a	       b	       c	       d	
+       *	       a	       a	       *
+       b	       *	       *	       b
+       *	       c	       *	       *
+       *	       d	       d	       *
+
+       a	       b	       c	       d	
+0.000000	     4.0	     3.0	     inf	
+2.000000	     0.0	     inf	     5.0	
+     inf	     6.0	     0.0	     inf	
+     inf	     1.0	     7.0	     0.0	
+
+Figure 7-23. Initialize dist_to[][] and node_from[][] based on G
+
+changes after k=a is processed.
+       a	       b	       c	       d	
+       *	       a	       a	       *
+       b	       *	       a	       b
+       *	       c	       *	       *
+       *	       d	       d	       *
+
+       a	       b	       c	       d	
+0.000000	     4.0	     3.0	     inf	
+2.000000	     0.0	     5.0	     5.0	
+     inf	     6.0	     0.0	     inf	
+     inf	     1.0	     7.0	     0.0	
+
+changes after k=b is processed.
+       a	       b	       c	       d	
+       *	       a	       a	       b
+       b	       *	       a	       b
+       b	       c	       *	       b
+       b	       d	       a	       *
+
+       a	       b	       c	       d	
+0.000000	     4.0	     3.0	     9.0	
+2.000000	     0.0	     5.0	     5.0	
+8.000000	     6.0	     0.0	    11.0	
+3.000000	     1.0	     6.0	     0.0	
+
+Figure 7-24. Changes to node_from[][] and dist_to[][] after k processes a and b
+
+by hand
+Figure 7-1. Modeling different problems using graphs
+
+12 nodes and 12 edges.
+adjacent nodes to C3: ['C2', 'B3', 'C4']
+edges adjacent to C3: [('C3', 'C2'), ('C3', 'B3'), ('C3', 'C4')]
+Figure 7-2. An undirected graph of 12 vertices and 12 edges
+
+Figure 7-3. A graph modeling a rectangular maze
+
+Hand drawn overlay to Figure 7-2.
+Figure 7-4. Hitting a dead end while exploring a maze
+
+unable to draw graph
+Figure 7-5. Depth First Search locates target if reachable from source
+
+Hand drawn overlay to Figure 7-2.
+Figure 7-6. Breadth First Search will locate shortest path to target, if reachable from source
+
+unable to draw graph
+Generated BFS, DFS and Guided Postscript files for Figure 7-8
+Figure 7-8. Comparing Depth First Search, Breadth First Search, and Guided Search
+
+(0, 0)		1				1									
+(0, 1)	1		1												
+(0, 2)		1		1				1							
+(0, 3)			1		1				1						
+(0, 4)				1						1					
+(1, 0)	1						1				1				
+(1, 1)						1						1			
+(1, 2)			1										1		
+(1, 3)				1											
+(1, 4)					1										1
+(2, 0)						1									
+(2, 1)							1						1		
+(2, 2)								1				1		1	
+(2, 3)													1		1
+(2, 4)										1				1	
+0.14222222222222222
+    node	 n0	 n1	 n2	 n3	 n4	 n5	 n6	 n7	 n8	 n9	n10	n11	n12	n13	n14	
+  (0, 0)	(1, 0)	(0, 1)
+  (0, 1)	(0, 0)	(0, 2)
+  (0, 2)	(0, 1)	(1, 2)	(0, 3)
+  (0, 3)	(0, 2)	(1, 3)	(0, 4)
+  (0, 4)	(0, 3)	(1, 4)
+  (1, 0)	(0, 0)	(2, 0)	(1, 1)
+  (1, 1)	(1, 0)	(2, 1)
+  (1, 2)	(0, 2)	(2, 2)
+  (1, 3)	(0, 3)
+  (1, 4)	(0, 4)	(2, 4)
+  (2, 0)	(1, 0)
+  (2, 1)	(1, 1)	(2, 2)
+  (2, 2)	(1, 2)	(2, 1)	(2, 3)
+  (2, 3)	(2, 2)	(2, 4)
+  (2, 4)	(1, 4)	(2, 3)
+Figure 7-9. Adjacency Matrix vs. Adjacency List representation
+
+12 nodes and 14 edges.
+adjacent nodes to C3: ['C4']
+edges adjacent to C3: [('C3', 'C4')]
+Figure 7-10. Sample directed graph with 12 nodes and 14 edges.
+
+Screen shots from Excel, together with graph from Figure 7-9
+Figure 7-11. Sample spreadsheet with underlying directed graph.
+
+Done by hand.
+Figure 7-12. Visualizing execution of Depth First Search for Cycle Detection.
+
+['B2', 'C2', 'B3', 'C3', 'B4', 'C4', 'B5', 'C5', 'A2', 'A3', 'A4', 'A5']
+Linear ordering of spreadsheet cells after Figure 12.
+
+Done by hand.
+Figure 7-13. Visualizing execution of Depth First Search for Topological Sort.
+
+Generated None
+Augmented by hand in SVG
+Figure 7-14. Modeling highway infrastructure in Massachusetts.
+
+Generated None
+Augmented by hand in SVG
+Figure 7-15. Modeling highway infrastructure in Massachusetts.
+
+Done by hand.
+Figure 7-16. The shortest path from a to c has accumulated total of 8
+
+   a |   b |   c |   d 
+   0 | inf | inf | inf 
+
+   a |   b |   c |   d 
+   0 |   3 |   9 | inf 
+
+   a |   b |   c |   d 
+   0 |   3 |   7 |   5 
+
+   a |   b |   c |   d 
+   0 |   3 |   6 |   5 
+
+Figure 7-17. Executing Dijkstra's algorithm on small graph
+
+   a |   b |   c |   d 
+   0 | inf | inf | inf 
+
+   a |   b |   c |   d 
+   0 |   3 |   1 | inf 
+
+   a |   b |   c |   d 
+   0 |   3 |   1 |   2 
+
+   a |   b |   c |   d 
+   0 |   3 |   1 |   2 
+
+Unable to relax from final "b" node
+Figure 7-18. A negative edge weight in the wrong place breaks Dijkstra's algorithm
+
+Good Graph: shortest distance from a to b is 1
+Bad Graph: Negative cycle exists in the graph.
+Done by hand.
+Figure 7-19. Two graphs with negative edge weights, but only one has a negative cycle
+
+['a', 'b', 'c', 'd']
+[('a', 'b', {'weight': 4}), ('a', 'c', {'weight': 3}), ('b', 'a', {'weight': 2}), ('b', 'd', {'weight': 5}), ('c', 'b', {'weight': 6}), ('d', 'b', {'weight': 1}), ('d', 'c', {'weight': 7})]
+Done by hand.
+Figure 7-20. Example for all-pairs shortest path problem
+
+by hand
+Figure 7-21. Intuition behind the all-pairs shortest path problem
+
+       a	       b	       c	       d	
+       *	       a	       a	       b
+       b	       *	       a	       b
+       b	       c	       *	       b
+       b	       d	       a	       *
+
+       a	       b	       c	       d	
+0.000000	     4.0	     3.0	     9.0	
+2.000000	     0.0	     5.0	     5.0	
+8.000000	     6.0	     0.0	    11.0	
+3.000000	     1.0	     6.0	     0.0	
+
+                   a	                   b	                   c	                   d	
+                   *	              a -> b	              a -> c	         a -> b -> d
+              b -> a	                   *	         b -> a -> c	              b -> d
+         c -> b -> a	              c -> b	                   *	         c -> b -> d
+         d -> b -> a	              d -> b	    d -> b -> a -> c	                   *
+
+Figure 7-22. dist_to, node_from, and actual shortest paths for graph in Figure 7-20
+
+       a	       b	       c	       d	
+       *	       a	       a	       *
+       b	       *	       *	       b
+       *	       c	       *	       *
+       *	       d	       d	       *
+
+       a	       b	       c	       d	
+0.000000	     4.0	     3.0	     inf	
+2.000000	     0.0	     inf	     5.0	
+     inf	     6.0	     0.0	     inf	
+     inf	     1.0	     7.0	     0.0	
+
+Figure 7-23. Initialize dist_to[][] and node_from[][] based on G
+
+changes after k=a is processed.
+       a	       b	       c	       d	
+       *	       a	       a	       *
+       b	       *	       a	       b
+       *	       c	       *	       *
+       *	       d	       d	       *
+
+       a	       b	       c	       d	
+0.000000	     4.0	     3.0	     inf	
+2.000000	     0.0	     5.0	     5.0	
+     inf	     6.0	     0.0	     inf	
+     inf	     1.0	     7.0	     0.0	
+
+changes after k=b is processed.
+       a	       b	       c	       d	
+       *	       a	       a	       b
+       b	       *	       a	       b
+       b	       c	       *	       b
+       b	       d	       a	       *
+
+       a	       b	       c	       d	
+0.000000	     4.0	     3.0	     9.0	
+2.000000	     0.0	     5.0	     5.0	
+8.000000	     6.0	     0.0	    11.0	
+3.000000	     1.0	     6.0	     0.0	
+
+Figure 7-24. Changes to node_from[][] and dist_to[][] after k processes a and b
+
+Done by hand.
+Figure 7-25. Sample Maze to defeat Guided Search
+
+Done by hand.
+Figure 7-26. Sample directed, acyclic graph for single-source, shortest path optimization
+

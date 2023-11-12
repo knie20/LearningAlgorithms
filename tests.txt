@@ -1,0 +1,27 @@
+trying to continue without matplotlib.pyplot
+Testing that Table is print to console
+       N	 Another	SquareRoot	
+       2	       2	  1.4142	
+       3	       3	  1.7321	
+       4	       4	  2.0000	
+       5	       5	  2.2361	
+       6	       6	  2.4495	
+       7	       7	  2.6458	
+       8	       8	  2.8284	
+       9	       9	  3.0000	
+debug : test case
+
+
+       N	  NetworkX	Adjacency List	Adjacency Matrix	
+     256	     0.073	     0.079	     0.343	
+     512	     0.075	     0.079	     0.674	
+   1,024	     0.073	     0.073	     1.343	
+   2,048	     0.074	     0.132	     2.543	
+['A1', 'B1', 'B2', 'C1', 'C2', 'C3', 'D1', 'D2', 'D3', 'D4', 'E1', 'E2', 'E3', 'E4', 'E5', 'F1', 'F2', 'F3', 'F4', 'G1', 'G2', 'G3', 'H1', 'H2', 'I1']
+['A1', 'B2', 'B1', 'C3', 'C2', 'C1', 'D4', 'D3', 'D2', 'D1', 'E5', 'E4', 'E3', 'E2', 'E1', 'F4', 'F3', 'F2', 'F1', 'G3', 'G2', 'G1', 'H2', 'H1', 'I1']
+['a', 'b', 'c', 'd']
+['a', 'b', 'd', 'c']
+12 nodes and 14 edges.
+adjacent nodes to C3: ['C4']
+edges adjacent to C3: [('C3', 'C4')]
+['B2', 'C2', 'B3', 'C3', 'B4', 'C4', 'B5', 'C5', 'A2', 'A3', 'A4', 'A5']

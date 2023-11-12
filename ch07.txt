@@ -1,0 +1,44 @@
+trying to continue without matplotlib.pyplot
+dfs_search_recursive in ch07.challenge
+Exercise 7-1 Recursive depth first search
+
+path_to_recursive implementation
+Exercise 7-2 Recursive Path_to
+
+recover_cycle in ch07.digraph_search
+Exercise 7-3 Recover cycle
+
+recover_negative_cycle in ch07.digraph_search
+detected negative cycle: c->d->b->c with weight=-2
+Exercise 7-4 Recover Negative cycle
+
+Construct graph with N=5 nodes requiring 4 iterations
+Defective Bellman-Ford only does 3 iterations
+Proper Bellman-Ford computes {'d': 3, 'e': 4, 'c': 2, 'b': 1, 's': 0} but with one fewer iteration it is {'d': 3, 'e': inf, 'c': 2, 'b': 1, 's': 0}
+Exercise 7-5 Validate Need for N-1 iterations
+
+       N	     BFS	      DS	      GS	
+       4	   10.48	    9.20	    9.24	
+       8	   43.86	   32.22	   30.42	
+      16	  188.78	   98.88	   88.06	
+      32	  838.61	  290.46	  213.68	
+      64	 3684.12	  791.36	  424.56	
+     128	15224.69	 2328.64	  819.02	
+       N	     BFS	      DS	      GS	
+       4	   16.00	    8.00	   11.00	
+       8	   64.00	   18.00	   54.00	
+      16	  256.00	   38.00	  233.00	
+      32	 1024.00	   78.00	  977.00	
+      64	 4096.00	  158.00	 4002.00	
+     128	16384.00	  318.00	16194.00	
+Exercise 7-6 Random NxN graphs, N=4 .. 128
+
+       N	  Dijkstra	 Topologic	
+      16	     0.110	     0.060	
+      64	     0.510	     0.245	
+     256	     2.404	     1.015	
+   1,024	    18.264	     4.372	
+   4,096	    82.794	    22.992	
+Exercise 7-7 DAG trials
+
+Exercise 7-8 Altered route when avoiding I-90

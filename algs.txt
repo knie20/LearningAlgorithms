@@ -1,0 +1,28 @@
+in setup
+real statement 1
+real statement 2
+real statement 3
+in setup
+real statement 1
+real statement 2
+real statement 3
+
+Time to add first ten million numbers (seconds)
+0.337885
+
+5 repetitions of sleeping for 100 milliseconds ten times.
+5	10	1.083476
+		Should be about 1.0:
+
+50 repetitions of sleeping for 100 milliseconds ten times.
+50	10	1.080833
+		Should be closer to 1.0 (but might not):
+
+500 repetitions of sleeping for 100 milliseconds ten times.
+500	10	1.080555
+		Should be even closer to 1.0:
+
+5 repetitions of sleeping for 100 milliseconds one hundred times.
+5	100	10.873983
+		Should be about 10.0:
+

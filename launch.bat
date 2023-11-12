@@ -3,7 +3,7 @@ set PYTHONPATH=.
 REM   Update, as needed, to point to your own Python installation or
 REM   just eliminate if you already have Python executables in your path
 REM   ------------------------------------------------------------------
-set PYTHON3=python3
+set PYTHON3=python
 
 echo "Running test cases -- should take about 15 minutes."
 %PYTHON3% -m unittest discover > tests.txt
