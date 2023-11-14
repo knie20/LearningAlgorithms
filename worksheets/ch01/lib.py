@@ -77,54 +77,29 @@ def tournament_two(A):
 
 def tournament_two_allow_odds(A):
     """
-    Returns two largest values in A. Only works for lists whose length
-    is a power of 2.
+    Returns two largest values in A.
     """
     N = len(A)
-    winner = [None] * (N-1)
-    loser = [None] * (N-1)
-    prior_winner_indexes = [-1] * (N-1)
     odd1out = 0
-    if(N//2 == 1):
+    if(N%2 == 1):
         odd1out = A[N - 1]
+        A.pop()
+        N -= 1
+    
+    (largest, second) = tournament_two(A)
 
-    # populate N/2 initial winners/losers
-    i = 0
-    for i in range(0, N, 2):
-        if A[i] < A[i+1]:
-            winner[i] = A[i+1]
-            loser[i] = A[i]
-        else:
-            winner[i] = A[i]
-            loser[i] = A[i+1]
-        i += 1
-
-    # pair up subsequent winners and record priors
-    m = 0
-    while i < N-1:
-        if winner[m] < winner[m+1]:
-            winner[i] = winner[m+1]
-            loser[i] = winner[m]
-            prior_winner_indexes[i]  = m+1
-        else:
-            winner[i] = winner[m]
-            loser[i] = winner[m+1]
-            prior_winner_indexes[i]  = m
-        m += 2
-        i += 1
-
-    # Find where second is hiding!
-    largest = winner[m]
-    second = loser[m]
-
-    if(odd1out >= largest):
+    if(odd1out > largest):
         second = largest
         largest = odd1out
-    
-    m = prior_winner_indexes[m]
-    while m >= 0:
-        if second < loser[m]:
-            second = loser[m]
-        m = prior_winner_indexes[m]
+    elif(odd1out > second ):
+        second = odd1out
 
     return (largest, second)
+
+def two_largest_attempt(A):
+    """Failed attempt to implement two largest."""
+    m1 = max(A[:len(A)//2])
+    m2 = max(A[len(A)//2:])
+    if m1 < m2:
+        return (m2, m1)
+    return (m1, m2)
