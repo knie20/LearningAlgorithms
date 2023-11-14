@@ -167,3 +167,20 @@ found in each chapter, there are some standalone Python scripts that can be exec
 * `ch07.tmg_load` - loads Massachusetts highway data set and visualizes waypoints and highway segments.
 * `ch07.viewer` - visualizes a 50x50 rectangular maze with `salt` of 0.05. Change to 0 and results is a perfect rectangular maze.
 * `ch07.xlsx_example` - application loads up an actual (though small) XLSX document containing the Fibonacci example from Figure 7-11. 
+
+
+## Ideas for Improvement
+- add worksheets module
+- worksheets.[ch1, ch2, ch3...]
+- each worksheet.chx has a lib.py and [challenge1, challenge2, challenge3...].py
+- lib.py contains defs of functions
+- challengex.py has the implementations of the lib functions, along with the empirical observations
+- the lib and challengex separation is so that the timeit module doesn't execute any empirical observation code while importing stuff
+
+- Add guide for VSCode Debugging
+- Add guide for following libraries for fresher python users:
+  - scipy
+  - numpy
+  - networkx
+  - Datatable
+  - timeit
