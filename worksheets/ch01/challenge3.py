@@ -11,7 +11,7 @@ counting_sort(A, M)
 is_sorted(A)'''
 setup_cs = '''
 import random
-from ch01.worksheets.lib import counting_sort
+from worksheets.ch01.lib import counting_sort
 from algs.sorting import is_sorted
 M = {0}
 n = {1}
@@ -23,7 +23,7 @@ counting_sort_improved(A, M)
 is_sorted(A)'''
 setup_csi = '''
 import random
-from ch01.worksheets.lib import counting_sort_improved
+from worksheets.ch01.lib import counting_sort_improved
 from algs.sorting import is_sorted
 M = {0}
 n = {1}
