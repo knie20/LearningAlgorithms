@@ -1,3 +1,6 @@
+from itertools import permutations
+from scipy.special import factorial
+
 def fragment_1(N):
     """Fragment-1 for exercise."""
     ct = 0
@@ -47,3 +50,28 @@ def f4(N):
         ct = ct + 1
         N = N ** 0.5
     return ct
+
+def factorial_model(n, a):
+    """Formula for A*N! with single coefficient."""
+    return a*factorial(n)
+
+def check_sorted(a):
+    """Determines if list is sorted."""
+    for i, val in enumerate(a):
+        if i > 0 and val < a[i-1]:
+            return False
+    return True
+
+def permutation_sort(A):
+    """
+    Generates all permutation of A until one is sorted.
+    Guaranteed to sort the values in A.
+    """
+    for attempt in permutations(A):
+        if check_sorted(attempt):
+            A[:] = attempt[:]         # copy back into A
+            return
+
+def make_reversed_list(max): 
+    A = list(range(0, max+1))
+    return A[::-1]

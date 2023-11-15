@@ -1,5 +1,3 @@
-import copy
-import math
 import numpy as np
 import seaborn as sns
 import pandas as pd
@@ -24,11 +22,6 @@ input_xs = [2**k for k in axis_x]
 input_ys = [f4(x) for x in input_xs]
 
 fit_ys = [model(x, a, b) for x in input_xs]
-
-x1 = np.array(axis_x)
-y1 = np.array(input_ys)
-x2 = np.array(axis_x)
-y2 = np.array(fit_ys)
 
 df = pd.DataFrame(data={
     'N': axis_x,
